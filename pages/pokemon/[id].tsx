@@ -3,7 +3,6 @@ import { NextPage, GetStaticPaths, GetStaticProps } from 'next';
 
 import { Layout } from '@/components/layouts';
 import { Pokemon } from '@/interfaces';
-import { pokeApi } from '@/api';
 import { Button, Card, Container, Grid, Text } from '@nextui-org/react';
 import Image from 'next/image';
 import { getPokemonInfo, localFavorites } from '@/utils';
@@ -40,7 +39,7 @@ const PokemonPage: NextPage<Props> = ({ pokemon }) => {
             <Card.Body>
               <Card.Image
                 src={
-                  pokemon.sprites.other?.dream_world.front_default ||
+                  pokemon.sprites.other?.dream_world.front_default ??
                   '/no-image.png'
                 }
                 alt={pokemon.name}

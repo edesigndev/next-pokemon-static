@@ -16,7 +16,7 @@ export const Layout: FC<Props> = ({ children, title }) => {
   return (
     <>
       <Head>
-        <title>{title || 'Pokemon App'}</title>
+        <title>{title ?? 'Pokemon App'}</title>
         <meta name='authot' content='Edgar Lazaro' />
         <meta
           name='description'
