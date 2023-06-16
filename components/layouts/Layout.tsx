@@ -11,8 +11,6 @@ interface Props {
 const origin = (typeof window !== 'undefined' && window.location.origin) || '';
 
 export const Layout: FC<Props> = ({ children, title }) => {
-  console.log('origin', { origin });
-
   return (
     <>
       <Head>

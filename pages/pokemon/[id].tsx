@@ -111,11 +111,11 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const { name } = params as { name: string };
+  const { id } = params as { id: string };
 
   return {
     props: {
-      pokemon: await getPokemonInfo(name),
+      pokemon: await getPokemonInfo(id),
     },
   };
 };
