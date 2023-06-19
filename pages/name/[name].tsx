@@ -40,7 +40,7 @@ const PokemonByNamePage: NextPage<Props> = ({ pokemon }) => {
             <Card.Body>
               <Card.Image
                 src={
-                  pokemon.sprites.other?.dream_world.front_default ||
+                  pokemon.sprites.other?.dream_world.front_default ??
                   '/no-image.png'
                 }
                 alt={pokemon.name}
@@ -109,19 +109,27 @@ const PokemonByNamePage: NextPage<Props> = ({ pokemon }) => {
 //Lado del servidor
 export const getStaticPaths: GetStaticPaths = async (ctx) => {
   const { data } = await pokeApi.get<PokemonListResponse>('/pokemon?limit=151');
-  const pokemonsNames = data.results.map((pokemon) => pokemon.name);
+  const pokemonsNames: string[] = data.results.map((pokemon) => pokemon.name);
   return {
     paths: pokemonsNames.map((name) => ({ params: { name } })),
-    fallback: false,
+    // fallback: false,
+    fallback: 'blocking',
   };
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { name } = params as { name: string };
+  const pokemon = await getPokemonInfo(name);
+
+  if (!pokemon) {
+    return {
+      redirect: { destination: '/', permanent: false },
+    };
+  }
 
   return {
     props: {
-      pokemon: await getPokemonInfo(name),
+      pokemon,
     },
   };
 };

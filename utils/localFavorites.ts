@@ -1,6 +1,6 @@
 const toogleFavorite = (id: number) => {
   let favorites: number[] = JSON.parse(
-    localStorage.getItem('favorites') || '[]'
+    localStorage.getItem('favorites') ?? '[]'
   );
 
   if (favorites.includes(id)) {
@@ -15,14 +15,14 @@ const toogleFavorite = (id: number) => {
 const existInFavorites = (id: number): boolean => {
   if (typeof window === 'undefined') return false;
   const favorites: number[] = JSON.parse(
-    localStorage.getItem('favorites') || '[]'
+    localStorage.getItem('favorites') ?? '[]'
   );
 
   return favorites.includes(id);
 };
 
 const getFavorites = (): number[] => {
-  return JSON.parse(localStorage.getItem('favorites') || '[]');
+  return JSON.parse(localStorage.getItem('favorites') ?? '[]');
 };
 
 export default { toogleFavorite, existInFavorites, getFavorites };
